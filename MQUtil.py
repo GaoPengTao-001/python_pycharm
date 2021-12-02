@@ -11,7 +11,7 @@ class MQUtil:
         credentials = pika.PlainCredentials(self.__user, self.__password)  # mq用户名和密码
         # 虚拟队列需要指定参数 virtual_host，如果是默认的可以不填。
         self.__connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host='192.168.31.55', port=5672, virtual_host='/', credentials=credentials))
+            pika.ConnectionParameters(host='192.168.31.50', port=5672, virtual_host='/', credentials=credentials))
         self.__channel = self.__connection.channel()
         # 声明消息队列，消息将在这个队列传递，如不存在，则创建
         result = self.__channel.queue_declare(queue=self.__queue)

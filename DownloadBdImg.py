@@ -1,17 +1,22 @@
 # -*- coding:UTF-8 -*-
 import requests
-from bs4 import BeautifulSoup
 import json
 import uuid
+import os
 
-from download import DownLoad
-
-download = DownLoad()
+#搜索名称
+keyword='胡歌'
+#下载图片个数，num*60
+num=30
 
 def download_img(img_url):
     r = requests.get(img_url, stream=True)
     if r.status_code == 200:
-        open('D:\\img\\pitaya\\'+ str(uuid.uuid1()) +'.jpg', 'wb').write(r.content) # 将内容写入图片
+        dir = 'D:\\img\\'+keyword
+        if not(os.path.isdir(dir)):
+            print(123333)
+            os.mkdir(dir)
+        open(dir +'\\' + str(uuid.uuid1()) +'.jpg', 'wb').write(r.content) # 将内容写入图片
         print("保存成功")
     del r
 
@@ -35,9 +40,8 @@ if __name__ == '__main__':
                'Upgrade-Insecure-Requests': '1',
                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36'
                }
-
     for i in range(1,20):
-        _req = requests.get(url=book.format(keyword='火龙果', num=str(i*60)),headers=headers)
+        _req = requests.get(url=book.format(keyword=keyword, num=str(i*num)),headers=headers)
         # 处理中文乱码的问题
         _req.encoding = _req.apparent_encoding
         text = json.loads(_req.text)

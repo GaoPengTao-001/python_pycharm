@@ -9,16 +9,14 @@ from download import DownLoad
 download = DownLoad()
 
 def download_img(img_url):
-    print (img_url)
     r = requests.get(img_url, stream=True)
-    print(r.status_code) # 返回状态码
     if r.status_code == 200:
-        open('D:\\img\\hamigua\\'+ str(uuid.uuid1()) +'.jpg', 'wb').write(r.content) # 将内容写入图片
-        print("done")
+        open('D:\\img\\pitaya\\'+ str(uuid.uuid1()) +'.jpg', 'wb').write(r.content) # 将内容写入图片
+        print("保存成功")
     del r
 
 if __name__ == '__main__':
-    book='https://image.baidu.com/search/acjson?tn=resultjson_com&logid=12586463282466808439&ipn=rj&ct=201326592&is=&fp=result&fr=&word=玫瑰花&queryWord=玫瑰花&cl=2&lm=-1&ie=utf-8&oe=utf-8&adpicid=&st=-1&z=&ic=0&hd=&latest=&copyright=&s=&se=&tab=&width=&height=&face=0&istype=2&qc=&nc=1&expermode=&nojc=&isAsync=&pn=60&rn=60&gsm=1c&1644805280512='
+    book='https://image.baidu.com/search/acjson?tn=resultjson_com&logid=12586463282466808439&ipn=rj&ct=201326592&is=&fp=result&fr=&word={keyword}&queryWord={keyword}&cl=2&lm=-1&ie=utf-8&oe=utf-8&adpicid=&st=-1&z=&ic=0&hd=&latest=&copyright=&s=&se=&tab=&width=&height=&face=0&istype=2&qc=&nc=1&expermode=&nojc=&isAsync=&pn={num}&rn=60&gsm=1c&1644805280512='
     # 设置headers，值为浏览器request headers
     headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
                'Accept-Encoding': 'gzip, deflate, br',
@@ -37,12 +35,14 @@ if __name__ == '__main__':
                'Upgrade-Insecure-Requests': '1',
                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36'
                }
-    _req = requests.get(url=book,headers=headers)
-    # 处理中文乱码的问题
-    _req.encoding = _req.apparent_encoding
-    text = json.loads(_req.text)
-    for i in text['data']:
-        if ('thumbURL' in i):
-            print(i['thumbURL'])
-            download_img(i['thumbURL'])
+
+    for i in range(1,20):
+        _req = requests.get(url=book.format(keyword='火龙果', num=str(i*60)),headers=headers)
+        # 处理中文乱码的问题
+        _req.encoding = _req.apparent_encoding
+        text = json.loads(_req.text)
+        for i in text['data']:
+            if ('thumbURL' in i):
+                print(i['thumbURL'])
+                download_img(i['thumbURL'])
 

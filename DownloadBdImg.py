@@ -18,7 +18,7 @@ def download_img(img_url):
     del r
 
 if __name__ == '__main__':
-    book='https://image.baidu.com/search/acjson?tn=resultjson_com&logid=12586463282466808439&ipn=rj&ct=201326592&is=&fp=result&fr=&word=彭于晏&queryWord=彭于晏&cl=2&lm=-1&ie=utf-8&oe=utf-8&adpicid=&st=-1&z=&ic=0&hd=&latest=&copyright=&s=&se=&tab=&width=&height=&face=0&istype=2&qc=&nc=1&expermode=&nojc=&isAsync=&pn=60&rn=60&gsm=1c&1644805280512='
+    book='https://image.baidu.com/search/acjson?tn=resultjson_com&logid=12586463282466808439&ipn=rj&ct=201326592&is=&fp=result&fr=&word=玫瑰花&queryWord=玫瑰花&cl=2&lm=-1&ie=utf-8&oe=utf-8&adpicid=&st=-1&z=&ic=0&hd=&latest=&copyright=&s=&se=&tab=&width=&height=&face=0&istype=2&qc=&nc=1&expermode=&nojc=&isAsync=&pn=60&rn=60&gsm=1c&1644805280512='
     # 设置headers，值为浏览器request headers
     headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
                'Accept-Encoding': 'gzip, deflate, br',
